@@ -1,15 +1,15 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware";
-import { Product } from "../interfaces";
+import { Producto } from "../interfaces";
 
 interface State {
- cart: Product[]
+ cart: Producto[]
  totalPrice: number
 }
 
 interface Actions {
- addToCart: (Item: Product) => void
- removeFromCart: (Item: Product) => void
+ addToCart: (Item: Producto) => void
+ removeFromCart: (Item: Producto) => void
 }
 
 const State = {
@@ -21,7 +21,7 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
  cart: State.cart,
  totalPrice: State.totalPrice,
 
- addToCart: (product: Product) => {
+ addToCart: (product: Producto) => {
   const cart = get().cart
   const cartItem = cart.find(item => item.id === product.id)
 
@@ -43,7 +43,7 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
   }
  },
 
- removeFromCart: (product: Product) => {
+ removeFromCart: (product: Producto) => {
   const cart = get().cart
   const cartItem = cart.find(item => item.id === product.id)
 

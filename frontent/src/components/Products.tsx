@@ -89,9 +89,9 @@ const Products = () => {
                     {product.count_in_stock}
                   </td>
                   <td className="px-4 py-3 flex items-center justify-center gap-4">
-                    <BsFillTrashFill onClick={() => deleteProdMutation.mutate(product.id)} size={22} className="text-red-300 cursor-pointer" />
+                    <BsFillTrashFill onClick={() => deleteProdMutation.mutate(product.id)} size={22} className="text-red-400 cursor-pointer" />
                     <Link to={`edit/${product.id}`}>
-                      <AiFillEdit size={22} className="text-white cursor-pointer" />
+                      <AiFillEdit size={22} className="text-blue-400 cursor-pointer" />
                     </Link>
                   </td>
                 </tr>

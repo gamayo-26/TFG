@@ -1,18 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Producto } from '../interfaces';
+import { useCartStore } from '../store/cart';
 
 interface Props {
     product: Producto
 }
 
 
-const ProductCard = ({product}: Props) => {
+const ProductCard = ({ product }: Props) => {
+
+
+    const addToCart = useCartStore(state => state.addToCart);
+
 
     return (
         <div>
             <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <Link to={`/product/${product.slug}`}>
-                    <img className="rounded-t-lg" src={`${import.meta.env.VITE_BAKEND_URL}${product.image}`} alt="" />
+                    <div className="flex justify-center">
+                        <img className="rounded" src={`${import.meta.env.VITE_BAKEND_URL}${product.image}`} alt="" />
+                    </div>
                 </Link>
                 <div className="p-5 ">
                     <Link to={`/product/${product.slug}`}>
@@ -51,6 +58,7 @@ const ProductCard = ({product}: Props) => {
 
 
                     <button
+                        onClick={() => addToCart(product)}
                         className="inline-flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Añadir al carrito
                         <svg aria-hidden="true" className="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
