@@ -8,4 +8,5 @@ urlpatterns = [
     path('post/', views.create_product),
     path('edit/<int:pk>/', views.edit_product),
     path('delete/<int:pk>/', views.delete_product),
+    path('menu/<str:category>/', views.get_products_by_category),
 ]

@@ -8,6 +8,8 @@ import AdminPage from "./pages/AdminPage"
 import AddProductPage from "./pages/AddProductPage"
 import EditProductPage from "./pages/EditProductPage"
 import SoloProduct from "./pages/SoloProduct"
+import MenuPage from "./pages/MenuPage"
+import ProductByCate from "./pages/ProductByCate"
 
 
 function App() {
@@ -19,7 +21,9 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="product/:slug" element={<SoloProduct />} />
-          
+          <Route path="menu" element={<MenuPage />} />
+          <Route path="menu/:cate" element={<ProductByCate />} />
+
           <Route element={<PrivateRoute />}>
 
           </Route>

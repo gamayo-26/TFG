@@ -1,6 +1,10 @@
 import { Producto } from "../interfaces";
 import { authAxios, axi } from "./useAxios";
 
+export const get_categories = async (category: string) => {
+    const response = await axi.get(`/products/menu/${category}/`);
+    return response.data;
+}
 
 export const get_product = async (slug: string) => {
     const response = await authAxios.get(`/products/get/${slug}/`);
