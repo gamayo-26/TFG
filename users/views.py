@@ -14,6 +14,15 @@ def delete_user(request, email):
         return Response(status = status.HTTP_204_NO_CONTENT)
     return Response(status = status.HTTP_401_UNAUTHORIZED )
 
+@api_view(['GET'])
+def search(request):
+    query = request.query_params.get('query')
+    if query is None:
+        query = ''
+    user = User.objects.filter(email__icontains=query, is_staff=False)
+    serializer = UserSerializer(user, many=True)
+    return Response({'users': serializer.data})
+
 
 @api_view(['GET'])
 def get_users(request):

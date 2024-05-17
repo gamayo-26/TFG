@@ -6,6 +6,13 @@ export const getUsers = async () => {
     return response.data;
 };
 
+// Funcion para buscar un usuario en la base de datos
+export const search_users = async (query: string) => {
+    const response = await authAxios.get(`/users/search/?query=${query}`);
+    return response.data;
+};
+
+
 
 // Función para realizar una solicitud de registro
 export const registerRequest = async (email: string, name: string, last_name: string, password: string ) => {

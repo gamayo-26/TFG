@@ -13,7 +13,7 @@ export interface Producto {
 }
 
 export interface User {
-    ID: number
+    id: number
     email: string
     name: string
     last_name: string
