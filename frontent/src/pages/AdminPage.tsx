@@ -18,7 +18,7 @@ const AdminPage = () => {
             if (search && show === 0) {
                 return search_products(search)
             }
-            return { product: [] }
+            return { products: [] }
         }
     })
 

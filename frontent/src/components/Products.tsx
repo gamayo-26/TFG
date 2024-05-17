@@ -8,12 +8,11 @@ import { delete_product, get_products } from "../api/products";
 import Loader from "./Loader";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import React from "react";
 import { Producto } from "../interfaces";
 
 
 interface Props {
-    results: any
+    results: any;
 }
 
 const Products = ({ results }: Props) => {
@@ -69,41 +68,39 @@ const Products = ({ results }: Props) => {
                         </th>
                     </tr>
                 </thead>
-                {results &&  results.product.length > 0 ? (
-                    <>
+                {results && results.products.length > 0 ? (
+                    <tbody>
                         {results &&
-                            results.product.map((product: Producto) => (
-                                <tbody>
-                                    <tr className="border-b dark:border-gray-700">
-                                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {product.id}
-                                        </th>
-                                        <td className="px-4 py-3">
-                                            {product.name}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            {product.description}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            {product.price}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            {product.count_in_stock}
-                                        </td>
-                                        <td className="px-4 py-3 flex items-center justify-center gap-4">
-                                            <BsFillTrashFill onClick={() => deleteProdMutation.mutate(product.id)} size={22} className="text-red-400 cursor-pointer" />
-                                            <Link to={`edit/${product.id}`}>
-                                                <AiFillEdit size={22} className="text-blue-400 cursor-pointer" />
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                            results.products.map((product: Producto) => (
+                                <tr className="border-b dark:border-gray-700">
+                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {product.id}
+                                    </th>
+                                    <td className="px-4 py-3">
+                                        {product.name}
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        {product.description}
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        {product.price}
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        {product.count_in_stock}
+                                    </td>
+                                    <td className="px-4 py-3 flex items-center justify-center gap-4">
+                                        <BsFillTrashFill onClick={() => deleteProdMutation.mutate(product.id)} size={22} className="text-red-400 cursor-pointer" />
+                                        <Link to={`edit/${product.id}`}>
+                                            <AiFillEdit size={22} className="text-blue-400 cursor-pointer" />
+                                        </Link>
+                                    </td>
+                                </tr>
                             ))}
-                    </>
+                    </tbody>
                 ) : (
                     <>
-                        {data?.pages.map((page: any, index: number) => (
-                            <React.Fragment key={index}>
+                        {data?.pages.map((page: any) => (
+                            <>
                                 <tbody
                                     key={page.meta.next}>
                                     {page.data.map((product: Producto) => (
@@ -133,30 +130,28 @@ const Products = ({ results }: Props) => {
                                         </tr>
 
                                     ))}
-                                </tbody>
-
-                                {!isLoading && data?.pages.length === 0 && (
+                    </tbody>
+                    {!isLoading && data?.pages.length === 0 && (
+                        <p className="text-xl text-slate-800 dark:text-slate-200">
+                            No more results
+                        </p>
+                    )}
+                    {!isLoading &&
+                        data?.pages?.length !== undefined &&
+                        data.pages.length > 0 &&
+                        hasNextPage && (
+                            <div ref={ref}>
+                                {isLoading || isFetchingNextPage ? (
                                     <p className="text-xl text-slate-800 dark:text-slate-200">
-                                        No more results
+                                        Loading more products...
                                     </p>
-                                )}
-                                {!isLoading &&
-                                    data?.pages?.length !== undefined &&
-                                    data.pages.length > 0 &&
-                                    hasNextPage && (
-                                        <div ref={ref}>
-                                            {isLoading || isFetchingNextPage ? (
-                                                <p className="text-xl text-slate-800 dark:text-slate-200">
-                                                    Loading more products...
-                                                </p>
-                                            ) : null}
-                                        </div>
-                                    )}
-                            </React.Fragment>
-                        ))}
+                                ) : null}
+                            </div>
+                        )}
                     </>
+                   ))}
+                </>
                 )}
-
             </table>
         </div >
     )
