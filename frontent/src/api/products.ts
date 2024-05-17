@@ -6,6 +6,11 @@ export const get_categories = async (category: string) => {
     return response.data;
 }
 
+export const search_products = async (query: string) => {
+    const response = await authAxios.get(`/products/search/?query=${query}`)
+    return response.data;
+};
+
 export const get_product = async (slug: string) => {
     const response = await authAxios.get(`/products/get/${slug}/`);
     return response.data;

@@ -7,6 +7,16 @@ from .serializer import ProductSerializer
 from core.pagination import CustomPagination
 
 @api_view(['GET'])
+def search(request):
+    query = request.query_params.get('query')
+    if query is None:
+        query = ''
+    product = Product.objects.filter(name__icontains=query)
+    serializer = ProductSerializer(product, many=True)
+    return Response({'products': serializer.data})
+
+
+@api_view(['GET'])
 def get_products_by_category(request, category):
     products = Product.objects.filter(category=category)
     serializer = ProductSerializer(products, many=True)
