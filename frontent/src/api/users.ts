@@ -1,4 +1,11 @@
-import { axi } from "./useAxios";
+import { authAxios, axi } from "./useAxios";
+
+// Funcion para obtener los usuariso
+export const getUsers = async () => {
+    const response = await authAxios.get('/users/get');
+    return response.data;
+};
+
 
 // Función para realizar una solicitud de registro
 export const registerRequest = async (email: string, name: string, last_name: string, password: string ) => {
@@ -15,3 +22,10 @@ export const loginRequest = async (email: string, password: string ) => {
     return response;
     
 }; 
+
+export const deleteRequest = async (email: string) => {
+    
+        // Realizar una solicitud DELETE a la ruta '/users/delete/' con el id proporcionado
+        await authAxios.delete(`/users/delete/${email}/`);
+        
+    };
