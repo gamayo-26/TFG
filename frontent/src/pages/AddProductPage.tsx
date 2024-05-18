@@ -64,7 +64,7 @@ const AddProductPage = () => {
     };
 
     const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newNumber = parseInt(event.target.value, 10);
+        const newNumber = parseFloat(event.target.value);
         setPrice(newNumber);
     };
 

@@ -10,32 +10,34 @@ import EditProductPage from "./pages/EditProductPage"
 import SoloProduct from "./pages/SoloProduct"
 import MenuPage from "./pages/MenuPage"
 import ProductByCate from "./pages/ProductByCate"
+import CartPage from "./pages/CartPage"
 
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />} >
-          <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="product/:slug" element={<SoloProduct />} />
-          <Route path="menu" element={<MenuPage />} />
-          <Route path="menu/:cate" element={<ProductByCate />} />
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />} >
+                    <Route index element={<HomePage />} />
+                    <Route path="login" element={<LoginPage />} />
+                    <Route path="register" element={<RegisterPage />} />
+                    <Route path="product/:slug" element={<SoloProduct />} />
+                    <Route path="menu" element={<MenuPage />} />
+                    <Route path="menu/:cate" element={<ProductByCate />} />
 
-          <Route element={<PrivateRoute />}>
+                    <Route element={<PrivateRoute />}>
+                        <Route path="cart" element={<CartPage />} />
 
-          </Route>
-          <Route path="admin" element={<AdminPrivateRoute />} >
-            <Route index element={<AdminPage />} />
-            <Route path="add" element={<AddProductPage />} />
-            <Route path="edit/:id" element={<EditProductPage />} />
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+                    </Route>
+                    <Route path="admin" element={<AdminPrivateRoute />} >
+                        <Route index element={<AdminPage />} />
+                        <Route path="add" element={<AddProductPage />} />
+                        <Route path="edit/:id" element={<EditProductPage />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App

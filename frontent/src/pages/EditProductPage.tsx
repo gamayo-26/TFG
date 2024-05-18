@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { edit_product, get_solo_product } from '../api/products';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { toast }from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const EditProductPage = () => {
 
@@ -16,7 +16,7 @@ const EditProductPage = () => {
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    const  { id } = useParams();
+    const { id } = useParams();
     let prodId: number;
     if (id !== undefined) {
         prodId = Number(id)
@@ -38,7 +38,7 @@ const EditProductPage = () => {
             setPrice(data.price)
             setImage(data.image)
         }
-    }, [data])  
+    }, [data])
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -88,7 +88,7 @@ const EditProductPage = () => {
     };
 
     const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newNumber = parseInt(event.target.value, 10);
+        const newNumber = parseFloat(event.target.value);
         setPrice(newNumber);
     };
 
