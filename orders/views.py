@@ -25,12 +25,14 @@ def create_order(request):
     total_price = data['total_price']
 
     # Calcular la suma de los precios de los productos
-    sum_of_prices = sum(item['price'] for item in orderItems)
-
+    sum_of_prices = sum(float(item['price'])*float(item['quantity']) for item in orderItems)
+    print('Sum of prices:', sum_of_prices)
+    print('Total price:', total_price)
     if total_price == sum_of_prices:
         # Crear la orden
         order = Order.objects.create(
             user=user,
+            phone=data['phone'],
             total_price=total_price
         )
 
@@ -38,9 +40,8 @@ def create_order(request):
             order=order,
             address=data['address'],
             city=data['city'],
-            country=data['country'],
             postal_code=data['postal_code'],
-            shipping_price=data['shipping_price']
+            comentary=data['comentary']
         )
 
         for i in orderItems:
@@ -48,7 +49,6 @@ def create_order(request):
             item = OrderItem.objects.create(
                 product=product,
                 order=order,
-                name=product.name,
                 quantity=i['quantity'],
                 price=i['price']
             )
@@ -58,6 +58,7 @@ def create_order(request):
         serializer = OrderSerializer(order, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
+        print('El precio total no coincide con la suma de los precios de los productos')
         return Response({'mensaje': 'El precio total no coincide con la suma de los precios de los productos'}, status=status.HTTP_400_BAD_REQUEST)
 
 

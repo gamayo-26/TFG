@@ -4,8 +4,11 @@ import { get_product } from "../api/products";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { StarIcon } from "@heroicons/react/16/solid";
+import { useCartStore } from "../store/cart";
 
 const SoloProduct = () => {
+
+    const addToCart = useCartStore(state => state.addToCart);
 
     const { slug } = useParams();
 
@@ -48,63 +51,64 @@ const SoloProduct = () => {
                             />
                         </div>
                     </div>
-                {/* Product info */}
-                <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-                    <h1 className="text-3xl font-extrabold tracking-tight text-blue-300">{data.name}</h1>
+                    {/* Product info */}
+                    <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
+                        <h1 className="text-3xl font-extrabold tracking-tight text-blue-300">{data.name}</h1>
 
-                    <div className="mt-3">
-                        <h2 className="sr-only text-white dark:text-white">{data.description}</h2>
-                        <p className="text-3xl text-green-300">€{data.price}</p>
-                    </div>
+                        <div className="mt-3">
+                            <h2 className="sr-only text-white dark:text-white">{data.description}</h2>
+                            <p className="text-3xl text-green-300">€{data.price}</p>
+                        </div>
 
-                    {/* Reviews */}
-                    <div className="mt-3">
-                        <h3 className="sr-only">Reviews</h3>
-                        <div className="flex items-center">
+                        {/* Reviews */}
+                        <div className="mt-3">
+                            <h3 className="sr-only">Reviews</h3>
                             <div className="flex items-center">
-                                {[0, 1, 2, 3, 4].map((rating) => (
-                                    <StarIcon
-                                        key={rating}
-                                        className={classNames(
-                                            data.rating > rating ? 'text-indigo-500' : 'text-gray-300',
-                                            'h-5 w-5 flex-shrink-0'
-                                        )}
-                                        aria-hidden="true"
-                                    />
-                                ))}
+                                <div className="flex items-center">
+                                    {[0, 1, 2, 3, 4].map((rating) => (
+                                        <StarIcon
+                                            key={rating}
+                                            className={classNames(
+                                                data.rating > rating ? 'text-indigo-500' : 'text-gray-300',
+                                                'h-5 w-5 flex-shrink-0'
+                                            )}
+                                            aria-hidden="true"
+                                        />
+                                    ))}
+                                </div>
+                                <p className="sr-only">{data.rating} out of 5 stars</p>
                             </div>
-                            <p className="sr-only">{data.rating} out of 5 stars</p>
                         </div>
-                    </div>
 
-                    <div className="mt-6">
-                        <h3 className="sr-only">Description</h3>
+                        <div className="mt-6">
+                            <h3 className="sr-only">Description</h3>
 
-                        <div
-                            className="text-base text-gray-700 space-y-6"
-                            dangerouslySetInnerHTML={{ __html: data.description }}
-                        />
-                    </div>
-
-                    <form className="mt-6">
-                        <div className="mt-10 flex sm:flex-col1">
-                            <button
-                                type="submit"
-                                className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-                            >
-                                Añadir al carrito
-                            </button>
+                            <div
+                                className="text-base text-gray-700 space-y-6"
+                                dangerouslySetInnerHTML={{ __html: data.description }}
+                            />
                         </div>
-                    </form>
 
-                    <section aria-labelledby="details-heading" className="mt-12">
-                        <h2 id="details-heading" className="sr-only">
-                            Additional details
-                        </h2>
-                    </section>
+                        <form className="mt-6">
+                            <div className="mt-10 flex sm:flex-col1">
+                                <button
+                                    onClick={() => addToCart(data)}
+                                    type="submit"
+                                    className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+                                >
+                                    Añadir al carrito
+                                </button>
+                            </div>
+                        </form>
+
+                        <section aria-labelledby="details-heading" className="mt-12">
+                            <h2 id="details-heading" className="sr-only">
+                                Additional details
+                            </h2>
+                        </section>
+                    </div>
                 </div>
             </div>
-        </div>
         </div >
     );
 }

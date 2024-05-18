@@ -23,3 +23,13 @@ export interface Token {
     exp: number;
     is_staff: boolean;
 }
+
+export interface Order {
+    total_price: number;
+    address: string;
+    city: string;
+    postal_code: string;
+    phone: string;
+    comentary: string;
+    order_items: Producto[];
+}
