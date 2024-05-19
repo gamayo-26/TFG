@@ -10,8 +10,18 @@ from productos.models import Product
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
+def search(request):
+    query = request.query_params.get('query')
+    if query is None:
+        query = ''
+    order = Order.objects.filter(user__email__icontains=query)
+    serializer = OrderSerializer(order, many=True)
+    return Response({'orders': serializer.data})
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
 def get_orders(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by('-created_at')
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
@@ -93,6 +103,5 @@ def my_orders(request):
 def delivered(request, pk):
     order = Order.objects.get(pk=pk)
     order.is_delivered = True
-    order.delivered_at = datetime.now()
     order.save()
     return Response('Order was delivered')
