@@ -11,6 +11,7 @@ import SoloProduct from "./pages/SoloProduct"
 import MenuPage from "./pages/MenuPage"
 import ProductByCate from "./pages/ProductByCate"
 import CartPage from "./pages/CartPage"
+import SoloOrder from "./pages/SoloOrder"
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 
                     <Route element={<PrivateRoute />}>
                         <Route path="cart" element={<CartPage />} />
-
+                        <Route path="order/:id" element={<SoloOrder />} />
                     </Route>
                     <Route path="admin" element={<AdminPrivateRoute />} >
                         <Route index element={<AdminPage />} />
