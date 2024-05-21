@@ -21,7 +21,11 @@ const Orders = ({ results }: Props) => {
     const [filteredOrders, setFilteredOrders] = useState(data);
 
     useEffect(() => {
-        setFilteredOrders(data);
+        // comprobar si hay datos
+        if (data)
+            setFilteredOrders(data);
+        else
+            setFilteredOrders([]);
     }, [data]);
     
     const handleChange = (e: any) => {

@@ -13,6 +13,7 @@ const CartPage = () => {
     const cart = useCartStore(state => state.cart);
     const total_price = useCartStore(state => state.totalPrice);
     const totalItems = useCartStore(state => state.totalItems);
+    const clearCart = useCartStore(state => state.clearCart);
 
     //constantes par enviar la orden al backend
     const [phone, setPhone] = useState<string>('');
@@ -23,22 +24,39 @@ const CartPage = () => {
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    const currentHour = new Date().getHours();
 
     const create_order_mutation = useMutation({
         mutationFn: create_order,
         onSuccess: () => {
+            clearCart()
             queryClient.invalidateQueries({ queryKey: ['orders'] })
             toast.success('Pedido creado con exito')
             navigate('/')
         },
         onError: () => {
             toast.error('Error al crear el pedido')
-            navigate('/')
         }
     })
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+        // Validar que la hora sea correcta
         event.preventDefault();
+        if (currentHour < 19 || currentHour > 23) {
+            toast.error('Los pedidos solo se pueden realizar entre las 19 y las 24 horas');
+            return;
+        }
+        // Validar que los campos no esten vacios
+        if (!phone || !address || !city || !postal_code) {
+            toast.error('Todos los campos son obligatorios');
+            return;
+        }
+        // Validar que el carrito no este vacio
+        if (cart.length === 0) {
+            toast.error('El carrito esta vacio');
+            return;
+        }
         create_order_mutation.mutate({
             total_price: total_price,
             address: address,
