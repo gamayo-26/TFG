@@ -16,13 +16,14 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [last_name, setLastName] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [re_password, setRePassword] = useState('');
     console.log(import.meta.env.VITE_BACKEND_URL)
 
     // Definiendo la mutacion para el registro
     const registerMutation = useMutation({
-        mutationFn: () => registerRequest(email, name, last_name, password),
+        mutationFn: () => registerRequest(email, name, last_name, password, phone),
         onSuccess: () => {
             toast.success('Registro exitoso!');
             navigate('/login');
@@ -87,6 +88,13 @@ const RegisterPage = () => {
                                 <input
                                     type="last_name" name="last_name" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username"
                                     value={last_name} onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="Telefono" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono</label>
+                                <input
+                                    type="tel" name="Telefono" id="Telefono" autoComplete="tel" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username"
+                                    value={phone} onChange={(e) => setPhone(e.target.value)}
                                 />
                             </div>
                             <div>

@@ -10,4 +10,6 @@ urlpatterns = [
     path('get/', views.get_users),
     path('delete/<str:email>/', views.delete_user),
     path('search/', views.search),
+    path('edit/<str:email>/', views.edit_profile),
+    path('get/solo/<int:pk>/', views.get_solo_user),
 ]

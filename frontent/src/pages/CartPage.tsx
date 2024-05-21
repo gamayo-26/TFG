@@ -43,7 +43,7 @@ const CartPage = () => {
 
         // Validar que la hora sea correcta
         event.preventDefault();
-        if (currentHour < 19 || currentHour > 23) {
+        if (currentHour < 1 || currentHour > 23) {
             toast.error('Los pedidos solo se pueden realizar entre las 19 y las 24 horas');
             return;
         }

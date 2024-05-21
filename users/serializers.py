@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'name', 'last_name', 'password']
+        fields = ['email', 'name', 'last_name', 'password', 'phone']
 
     
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -19,7 +19,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         token['email'] = user.email
-        token['avatar'] = user.avatar.url
         token['is_staff'] = user.is_staff
         
         return token

@@ -16,11 +16,14 @@ export interface User {
     id: number
     email: string
     name: string
+    phone: string
     last_name: string
 }
   
 export interface Token {
     exp: number;
+    user_id: number;
+    email: string;
     is_staff: boolean;
 }
 

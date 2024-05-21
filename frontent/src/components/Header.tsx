@@ -173,7 +173,7 @@ const Header = () => {
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <a
-                                                            href="#"
+                                                            href="/profile"
                                                             className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 dark:text-slate-200')}
                                                         >
                                                             Tu perfil
