@@ -6,6 +6,7 @@ import { useEffect,  } from "react";
 import { toast } from "react-hot-toast";
 import { useInView } from "react-intersection-observer";
 import React from "react";
+import Loader from "../components/Loader";
 
 
 const HomePage = () => {  
@@ -26,7 +27,7 @@ const HomePage = () => {
         }
     }, [inView])
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <Loader />
     if (error instanceof Error ) return <>{toast.error(error.message)}</>
 
     return (

@@ -59,7 +59,6 @@ const Products = ({ results }: Props) => {
                         <th scope="col" className="px-4 py-3">Name</th>
                         <th scope="col" className="px-4 py-3">Descripction</th>
                         <th scope="col" className="px-4 py-3">Price</th>
-                        <th scope="col" className="px-4 py-3">Stock</th>
                         <th scope="col" className="px-4 py-3 flex justify-center gap-4">
                             Actions
                             <Link to="add">
@@ -84,9 +83,6 @@ const Products = ({ results }: Props) => {
                                     </td>
                                     <td className="px-4 py-3">
                                         {product.price}
-                                    </td>
-                                    <td className="px-4 py-3">
-                                        {product.count_in_stock}
                                     </td>
                                     <td className="px-4 py-3 flex items-center justify-center gap-4">
                                         <BsFillTrashFill onClick={() => deleteProdMutation.mutate(product.id)} size={22} className="text-red-400 cursor-pointer" />
@@ -117,9 +113,6 @@ const Products = ({ results }: Props) => {
                                             </td>
                                             <td className="px-4 py-3">
                                                 {product.price}
-                                            </td>
-                                            <td className="px-4 py-3">
-                                                {product.count_in_stock}
                                             </td>
                                             <td className="px-4 py-3 flex items-center justify-center gap-4">
                                                 <BsFillTrashFill onClick={() => deleteProdMutation.mutate(product.id)} size={22} className="text-red-400 cursor-pointer" />

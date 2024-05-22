@@ -3,7 +3,6 @@ import Loader from "../components/Loader";
 import { get_product } from "../api/products";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { StarIcon } from "@heroicons/react/16/solid";
 import { useCartStore } from "../store/cart";
 
 const SoloProduct = () => {
@@ -33,9 +32,6 @@ const SoloProduct = () => {
         return toast.error("Error!");
     }
 
-    function classNames(...classes: (false | null | undefined | string)[]) {
-        return classes.filter(Boolean).join(' ')
-    }
 
     return (
 
@@ -58,26 +54,6 @@ const SoloProduct = () => {
                         <div className="mt-3">
                             <h2 className="sr-only text-white dark:text-white">{data.description}</h2>
                             <p className="text-3xl text-green-300">€{data.price}</p>
-                        </div>
-
-                        {/* Reviews */}
-                        <div className="mt-3">
-                            <h3 className="sr-only">Reviews</h3>
-                            <div className="flex items-center">
-                                <div className="flex items-center">
-                                    {[0, 1, 2, 3, 4].map((rating) => (
-                                        <StarIcon
-                                            key={rating}
-                                            className={classNames(
-                                                data.rating > rating ? 'text-indigo-500' : 'text-gray-300',
-                                                'h-5 w-5 flex-shrink-0'
-                                            )}
-                                            aria-hidden="true"
-                                        />
-                                    ))}
-                                </div>
-                                <p className="sr-only">{data.rating} out of 5 stars</p>
-                            </div>
                         </div>
 
                         <div className="mt-6">

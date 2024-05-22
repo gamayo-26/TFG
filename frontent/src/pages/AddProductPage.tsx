@@ -2,12 +2,11 @@ import React, { ChangeEvent, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { post_product } from '../api/products';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast }from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const AddProductPage = () => {
 
     const [name, setName] = useState<string>('');
-    const [countInStock, setCountInStock] = useState<number>(0);
     const [category, setCategory] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<number>(0);
@@ -37,7 +36,6 @@ const AddProductPage = () => {
         addProdMutation.mutate({
             id: 0,
             name: name,
-            count_in_stock: countInStock,
             category: category,
             description: description,
             price: price,
@@ -50,17 +48,12 @@ const AddProductPage = () => {
         setName(event.target.value);
     };
 
-    const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setCategory(event.target.value);
     };
 
     const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
         setDescription(event.target.value);
-    };
-
-    const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newNumber = parseInt(event.target.value, 10);
-        setCountInStock(newNumber);
     };
 
     const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,14 +119,6 @@ const AddProductPage = () => {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Count in Stock</label>
-                                    <input
-                                        value={countInStock}
-                                        onChange={handleCountChange}
-                                        type="number" name="count_in_stock" id="count_in_stock" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Count in Stock" />
-                                </div>
-
-                                <div>
                                     <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
                                     <input
                                         value={price}
@@ -143,10 +128,26 @@ const AddProductPage = () => {
 
                                 <div>
                                     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                    <input
+                                    <select
                                         value={category}
                                         onChange={handleCategoryChange}
-                                        type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Category" />
+                                        name="category"
+                                        id="category"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    >
+                                        <option value="">Select product category</option>
+                                        <option value="Menu">Menu</option>
+                                        <option value="Hamburguesas">Hamburguesas</option>
+                                        <option value="pizza P">Pizzeta</option>
+                                        <option value="pizza M">Pizza Mediana</option>
+                                        <option value="pizza F">Pizza Familiar</option>
+                                        <option value="Bocadillo">Bocadillo</option>
+                                        <option value="Sandwich">Sandwich</option>
+                                        <option value="Perrito">Perrito</option>
+                                        <option value="Picoteo">Picoteo</option>
+                                        <option value="Bebida">Bebida</option>
+                                        <option value="Postre">Postre</option>
+                                    </select>
                                 </div>
 
                                 <div className="sm:col-span-2">

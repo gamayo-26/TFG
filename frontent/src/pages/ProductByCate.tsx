@@ -5,7 +5,6 @@ import { get_categories } from "../api/products";
 import Loader from "../components/Loader";
 import { toast } from "react-hot-toast";
 import { Producto } from "../interfaces";
-import Rating from "../components/Rating";
 import { useCartStore } from "../store/cart";
 
 const ProductByCate = () => {
@@ -43,15 +42,6 @@ const ProductByCate = () => {
                                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-slate-200">
                                         $ {product.price}
                                     </h5>
-                                    <div className="flex items-center">
-
-
-
-                                        <span className="ml-1 text-gray-500 dark:text-gray-400">
-                                            <Rating value={product.rating} text={undefined} />                                  
-                                        </span>
-
-                                    </div>
                                 </div>
                             </Link>
                             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
