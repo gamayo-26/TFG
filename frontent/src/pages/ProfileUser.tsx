@@ -9,6 +9,7 @@ import { my_orders } from "../api/orders";
 import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
 import logo_user from "../assets/logo_user.png";
+import Cuestions from "../components/Cuestions";
 
 const UserProfile = () => {
 
@@ -28,6 +29,7 @@ const UserProfile = () => {
 
     useEffect(() => {
         if (user) {
+            console.log(user);
             setStateName(user.name);
             setStateLast(user.last_name);
             setPhone(user.phone);
@@ -61,18 +63,29 @@ const UserProfile = () => {
             id: user.id,
             name: stateName,
             last_name: stateLast,
-            phone: user.phone,
+            phone: phone,
             email: user.email,
         });
     };
 
-    // Funcion para eliminar la cuenta
-    const deleteAccount = async () => {
-        if (window.confirm('¿Estás seguro de que quieres eliminar tu cuenta?')) {
+    // Funciones para eliminar la cuenta
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const handleDelete = () => {
+        setIsDialogOpen(true);
+    }
+
+    const handleConfirmation = async (confirmed: boolean) => {
+        setIsDialogOpen(false);
+        if (confirmed) {
             await deleteRequest(user.email);
             toast.success('Cuenta eliminada');
+            // Redirigir a la página de inicio
+            window.location.href = '/login';
         }
     }
+
 
 
     if (user === undefined) return <p>No user here!</p>
@@ -111,15 +124,12 @@ const UserProfile = () => {
                                 >
                                     Editar Perfil
                                 </button>
+                                <>
+                                    <button onClick={handleDelete} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-200">Eliminar cuenta</button>
+                                    {isDialogOpen && <Cuestions open={isDialogOpen} setOpen={setIsDialogOpen} onConfirm={handleConfirmation} />}
+                                </>
                             </div>
-                            <div className="flex mt-4 space-x-3 md:mt-6">
-                                <button
-                                    onClick={() => deleteAccount()}
-                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-200"
-                                >
-                                    Eliminar Cuenta
-                                </button>
-                            </div>
+
                         </div>
 
                         <div className="overflow-x-auto">
@@ -197,9 +207,12 @@ const UserProfile = () => {
                                     placeholder="Last name"
                                 />
                             </div>
-                            <div className="flex mt-4 space-x-3 md:mt-6">
-                                <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">
+                            <div className="flex mt-4 space-x-3 md:mt-6 flex-flow px-4">
+                                <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-red-200">
                                     Guardar Cambios
+                                </button>
+                                <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-200" onClick={() => setShow(true)}>
+                                    Cancelar
                                 </button>
                             </div>
                         </form>

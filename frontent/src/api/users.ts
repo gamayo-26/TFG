@@ -14,7 +14,6 @@ export const search_users = async (query: string) => {
 };
 
 
-
 // Función para realizar una solicitud de registro
 export const registerRequest = async (email: string, name: string, last_name: string, password: string, phone: string ) => {
 
@@ -35,7 +34,6 @@ export const deleteRequest = async (email: string) => {
     
         // Realizar una solicitud DELETE a la ruta '/users/delete/' con el id proporcionado
         await authAxios.delete(`/users/delete/${email}/`);
-        
     };
 
     export const get_solo_user = async (id: number) => {
@@ -47,7 +45,7 @@ export const deleteRequest = async (email: string) => {
         const formData = new FormData();
         formData.append("name", data.name)
         formData.append("last_name", data.last_name)
-        formData.append("phene", data.phone)
+        formData.append("phone", data.phone)
         formData.append("email", data.email)
         await authAxios.put(`/users/edit/${data.email}/`, formData)
     };

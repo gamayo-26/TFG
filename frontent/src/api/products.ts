@@ -12,7 +12,7 @@ export const search_products = async (query: string) => {
 };
 
 export const get_product = async (slug: string) => {
-    const response = await authAxios.get(`/products/get/${slug}/`);
+    const response = await axi.get(`/products/get/${slug}/`);
     return response.data;
 } 
 

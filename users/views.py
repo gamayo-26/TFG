@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['DELETE'])
 def delete_user(request, email):
-    if request.user.is_staff:
+    if request.user.is_staff or request.user.email == email:
         user = User.objects.get(email=email)
         user.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)
@@ -56,6 +56,7 @@ class LoginView(TokenObtainPairView):
 def get_solo_user(request, pk):
     user = User.objects.get(pk=pk)
     serializer = UserSerializer(user)
+    print(serializer.data)
     return Response(serializer.data)
 
 

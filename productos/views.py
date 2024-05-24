@@ -41,8 +41,10 @@ def get_product_admin(request, pk):
 
 @api_view(['GET'])
 def get_product(request, slug):
+    print(slug)
     product = Product.objects.get(slug=slug)
     serializer = ProductSerializer(product, many=False)
+    print(serializer.data)
     return Response(serializer.data)
 
 

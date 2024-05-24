@@ -57,6 +57,14 @@ const CartPage = () => {
             toast.error('El carrito esta vacio');
             return;
         }
+        // Validar que el usuario este autenticado
+        const user = localStorage.getItem('user');
+        if (!user) {
+            toast.error('Debes iniciar sesion para realizar un pedido');
+            return;
+        }
+
+        // Enviar la orden al backend
         create_order_mutation.mutate({
             total_price: total_price,
             address: address,

@@ -66,12 +66,14 @@ const Header = () => {
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-
+                                    <Link to={'/'}>
+                                        <span className="sr-only">Pizza Sprint</span>
                                     <img
                                         className="hidden h-8 w-auto lg:block"
                                         src={Logo}
                                         alt="Logo"
                                     />
+                                    </Link>
                                 </div>
 
 
@@ -79,15 +81,15 @@ const Header = () => {
 
                                     <div className="flex space-x-4">
 
+                                        <Link
+                                            to={'/'}
+                                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                        >
+                                            Inicio
+                                        </Link>
+
                                         {isAuth ? (
                                             <>
-                                                <Link
-                                                    to={'/'}
-                                                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
-                                                >
-                                                    Inicio
-                                                </Link>
-
                                                 <Link
                                                     to={'/menu/'}
                                                     className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
@@ -100,7 +102,7 @@ const Header = () => {
                                             <>
                                                 <Link
                                                     to={'/login'}
-                                                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                                                 >
                                                     Iniciar sesión
                                                 </Link>
@@ -122,8 +124,6 @@ const Header = () => {
                                                 Panel de administrador
                                             </Link>
                                         )}
-
-
                                     </div>
 
                                 </div>
@@ -209,13 +209,13 @@ const Header = () => {
                                 <div className="w-full grid grid-cols-1">
                                     <Link
                                         to={'/'}
-                                        className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                                     >
                                         Inicio
                                     </Link>
 
                                     <Link
-                                        to={'/'}
+                                        to={'/menu/'}
                                         className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                                     >
                                         Categorias
@@ -225,8 +225,14 @@ const Header = () => {
                             ) : (
                                 <div className="w-full grid grid-cols-1">
                                     <Link
+                                        to={'/'}
+                                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                                    >
+                                        Inicio
+                                    </Link>
+                                    <Link
                                         to={'/login'}
-                                        className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                                     >
                                         Iniciar sesión
                                     </Link>
