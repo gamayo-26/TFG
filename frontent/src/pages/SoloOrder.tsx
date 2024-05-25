@@ -7,21 +7,21 @@ import Loader from "../components/Loader";
 const SoloOrder = () => {
     const { id } = useParams();
 
+    
     let new_id: number;
-
+    
     if (id !== undefined) {
         new_id = Number(id);
     }
-
+    
     const { data, isError, isLoading } = useQuery({
         queryKey: ["orders"],
         queryFn: () => solo_order(new_id),
     });
-
     
-
     if (isError) return toast.error("Error!");
     if (isLoading) return <Loader />;
+    if (!data) return <Loader />;
 
     return (
         <div className="overflow-x-auto container mx-auto px-4 pt-11">
@@ -33,27 +33,27 @@ const SoloOrder = () => {
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-center">
-                            City
+                            Ciudad
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-center">
-                            Address
+                            Direccion
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-center">
-                            Zip code
+                            Hora de creacion
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-center">
-                            Created at
+                            Hora de entrega
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-center">
-                            Total Price
+                            Precio total
                         </th>
 
                         <th scope="col" className="px-4 py-3 text-center">
-                            Entregado
+                            Estado
                         </th>
                     </tr>
                 </thead>
@@ -64,7 +64,11 @@ const SoloOrder = () => {
                             scope="row"
                             className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
                         >
-                            {data.phone}
+                                {data && data.user !== undefined && (
+                                    <>
+                                        {data.user.phone}
+                                    </>
+                                )}
                         </th>
 
                         <td className="px-4 py-3 text-center">
@@ -89,20 +93,12 @@ const SoloOrder = () => {
                         </td>
 
                         <td className="px-4 py-3 text-center">
-                            <div className="flex justify-center gap-4">
-
-                                {data && data.shipping_address !== undefined && (
-                                    <>
-                                        {data.shipping_address.postal_code}
-                                    </>
-                                )}
-                            </div>
-                        </td>
-
-                        <td className="px-4 py-3 text-center">
                             {new Date(data.created_at).toLocaleString()}
                         </td>
 
+                        <td className="px-4 py-3 text-center">
+                            {(data.hora_entrega)}
+                        </td>
                         <th
                             scope="row "
                             className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
@@ -111,10 +107,14 @@ const SoloOrder = () => {
                         </th>
 
                         <td className="px-4 py-3 text-center">
-                            {data.is_delivered === false || null ? (
+                            {data.status === 0 ? (
                                 <p>En preparacion</p>
-                            ) : (
+                            ) : data.status === 1 ? (
                                 <p>En reparto</p>
+                            ) : data.status === 2 ? (
+                                <p>Entregado</p>
+                            ) : (
+                                <p>Cancelado</p>
                             )}
                         </td>
                     </tr>

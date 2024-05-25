@@ -16,7 +16,7 @@ const CartPage = () => {
     const clearCart = useCartStore(state => state.clearCart);
 
     //constantes par enviar la orden al backend
-    const [phone, setPhone] = useState<string>('');
+    const [hora, setHora] = useState<string>('lo antes posible');
     const [address, setAddress] = useState<string>('');
     const [city, setCity] = useState<string>('');
     const [postal_code, setPostalCode] = useState<string>('');
@@ -39,16 +39,52 @@ const CartPage = () => {
         }
     })
 
+    const generateRemainingHours = () => {
+        const now = new Date();
+        let currentHour = now.getHours();
+        let currentMinute = now.getMinutes() + 45;
+
+        // Si la hora actual es antes de las 19, establecer la hora a 19
+        if (currentHour < 19) {
+            currentHour = 19;
+            currentMinute = 45;
+        }
+
+        // Si los minutos son 60 o más, incrementa la hora y ajusta los minutos
+        if (currentMinute >= 60) {
+            currentHour++;
+            currentMinute -= 60;
+        }
+
+        // Redondear a los próximos 5 minutos
+        currentMinute = 5 * Math.ceil(currentMinute / 5);
+
+        const remainingHours = [];
+        for (let i = currentHour; i <= 23; i++) {
+            for (let j = currentMinute; j < 60; j += 5) {
+                remainingHours.push(`${i.toString().padStart(2, '0')}:${j.toString().padStart(2, '0')}`);
+                currentMinute = 0; // Reset minutes after the first iteration
+            }
+        }
+        return remainingHours;
+    };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 
-        // Validar que la hora sea correcta
+        // Validar que el pedido sea de mas de 10€
+        if (total_price < 10) {
+            toast.error('El pedido debe ser de al menos 10€');
+            return;
+        }
+
+        // Validar que la hora sea correcta (entre las 19 y las 24) si es lo antes posible
         event.preventDefault();
-        if (currentHour < 1 || currentHour > 23) {
+        if (hora === 'lo antes posible' && currentHour < 19 || currentHour >= 24) {
             toast.error('Los pedidos solo se pueden realizar entre las 19 y las 24 horas');
             return;
         }
         // Validar que los campos no esten vacios
-        if (!phone || !address || !city || !postal_code) {
+        if (!address || !city || !postal_code) {
             toast.error('Todos los campos son obligatorios');
             return;
         }
@@ -58,7 +94,7 @@ const CartPage = () => {
             return;
         }
         // Validar que los codigos postales sean de la sona de reparto (28035 y 28031)
-        if ( postal_code !== '28051' && postal_code !== '28031') {
+        if (postal_code !== '28051' && postal_code !== '28031') {
             toast.error('Lo siento, no repartimos en tu zona');
             return;
         }
@@ -67,14 +103,14 @@ const CartPage = () => {
         create_order_mutation.mutate({
             total_price: total_price,
             address: address,
-            phone: phone,
             city: city,
             postal_code: postal_code,
             order_items: cart,
             comentary: comentary,
+            hora: hora
         })
     }
-    
+
     return (
         <>
             <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 flex flex-col lg:flex-row justify-between">
@@ -175,46 +211,53 @@ const CartPage = () => {
                                     <div className="sm:col-span-2">
                                         <label className="block text-sm font-semibold leading-6 text-gray-900 dark:text-gray-200">Ciudad</label>
                                         <div className="mt-2.5">
-                                            <input 
-                                            onChange={(e) => setCity(e.target.value)}
-                                            value={city}
-                                            type="text" autoComplete="address-level2" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <input
+                                                onChange={(e) => setCity(e.target.value)}
+                                                value={city}
+                                                type="text" autoComplete="address-level2" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
                                     <div className="sm:col-span-2">
                                         <label htmlFor="last-name" className="block text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">Codigo Postal</label>
                                         <div className="mt-2.5">
-                                            <input 
-                                            onChange={(e) => setPostalCode(e.target.value)}
-                                            value={postal_code}
-                                            type="text" autoComplete="postal-code" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <input
+                                                onChange={(e) => setPostalCode(e.target.value)}
+                                                value={postal_code}
+                                                type="text" autoComplete="postal-code" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
                                     <div className="sm:col-span-2">
                                         <label htmlFor="company" className="block text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">Direccion</label>
                                         <div className="mt-2.5">
-                                            <input 
-                                            onChange={(e) => setAddress(e.target.value)}
-                                            value={address}
-                                            type="text" autoComplete="street-address" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <input
+                                                onChange={(e) => setAddress(e.target.value)}
+                                                value={address}
+                                                type="text" autoComplete="street-address" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">Numero de Telefono</label>
+                                        <label htmlFor="phone-" className="block text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">Hora Estimada</label>
                                         <div className="relative mt-2.5">
-                                            <input 
-                                            onChange={(e) => setPhone(e.target.value)}
-                                            value={phone}
-                                            type="text" autoComplete="tel" className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                            <select
+                                                id="time"
+                                                value={hora}
+                                                onChange={(e) => setHora(e.target.value)}
+                                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            >
+                                                <option value={'lo antes posible'}>lo antes posible</option>
+                                                {generateRemainingHours().map((time, i) =>
+                                                    <option key={i} value={time}>{time}</option>
+                                                )}
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="sm:col-span-2">
                                         <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">Comentario sobre la entrega</label>
                                         <div className="mt-2.5">
                                             <textarea
-                                            onChange={(e) => setComentary(e.target.value)}
-                                            value={comentary}
-                                            rows={4} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                                onChange={(e) => setComentary(e.target.value)}
+                                                value={comentary}
+                                                rows={4} className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                                         </div>
                                     </div>
                                     <div className="sm:col-span-2 mb-5">

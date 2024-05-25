@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from .models import Order, OrderItem, ShippingAddress
+from .models import Order, OrderItem, ShippingAddress 
+from users.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'phone']  # Asegúrate de que 'telefono' es el nombre correcto del campo
+
 
 class ShippingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,7 +19,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.email')
+    user = UserSerializer(many=False, read_only=True)
     order_items = serializers.SerializerMethodField(read_only=True)
     shipping_address = serializers.SerializerMethodField(read_only=True)
 

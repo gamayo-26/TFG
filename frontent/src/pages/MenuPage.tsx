@@ -18,7 +18,7 @@ const CatePage = () => {
             <div className="p-8 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-16">
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/pizza P`}>
+                    <Link to={`/menu/Pizzeta`}>
                         <img
                             className="rounded-t-lg"
                             src={Pizzeta}
@@ -26,7 +26,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/pizza`}>
+                        <Link to={`/menu/Pizzeta`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Pizzeta
                             </h5>
@@ -35,7 +35,7 @@ const CatePage = () => {
                 </div>
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Keyboards`}>
+                    <Link to={`/menu/Pizza Mediana`}>
                         <img
                             className="rounded-t-lg"
                             src={Mediana}
@@ -43,7 +43,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/cate/Keyboards`}>
+                        <Link to={`/cate/Pizza Mediana`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Medianas
                             </h5>
@@ -52,7 +52,7 @@ const CatePage = () => {
                 </div>
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Pizza Familiar`}>
                         <img
                             className="rounded-t-lg"
                             src={Familiar}
@@ -60,7 +60,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Pizza Familiar`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Familiares
                             </h5>
@@ -69,7 +69,7 @@ const CatePage = () => {
                 </div>
                     
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Hamburguesas`}>
                         <img
                             className="rounded-t-lg"
                             src={Hamburgesa}
@@ -77,7 +77,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Hamburguesas`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Hamburguesa
                             </h5>
@@ -86,7 +86,7 @@ const CatePage = () => {
                 </div>    
                 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Bocadillo`}>
                         <img
                             className="rounded-t-lg"
                             src={Bocadillo}
@@ -94,7 +94,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Bocadillo`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Bocadillos
                             </h5>
@@ -103,7 +103,7 @@ const CatePage = () => {
                 </div>
                     
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Ensalada`}>
                         <img
                             className="rounded-t-lg"
                             src={Ensalada}
@@ -111,7 +111,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Ensalada`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Ensaladas
                             </h5>
@@ -119,7 +119,7 @@ const CatePage = () => {
                     </div>
                 </div>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Perrito`}>
                         <img
                             className="rounded-t-lg"
                             src={Perrito}
@@ -127,7 +127,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Perrito`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Perritos
                             </h5>
@@ -135,7 +135,7 @@ const CatePage = () => {
                     </div>
                 </div>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Sandwich`}>
                         <img
                             className="rounded-t-lg"
                             src={Sandwich}
@@ -143,7 +143,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Sandwich`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Sandwiches
                             </h5>
@@ -151,7 +151,7 @@ const CatePage = () => {
                     </div>
                 </div>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Picoteo`}>
                         <img
                             className="rounded-t-lg"
                             src={Entrantes}
@@ -159,7 +159,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Picoteo`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Entrantes
                             </h5>
@@ -167,7 +167,7 @@ const CatePage = () => {
                     </div>
                 </div>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Postre`}>
                         <img
                             className="rounded-t-lg"
                             src={logo}
@@ -175,7 +175,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Postre`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Postres
                             </h5>
@@ -183,7 +183,7 @@ const CatePage = () => {
                     </div>
                 </div>
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link to={`/menu/Lang`}>
+                    <Link to={`/menu/Bebida`}>
                         <img
                             className="rounded-t-lg"
                             src={Bebida}
@@ -191,7 +191,7 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/menu/Lang`}>
+                        <Link to={`/menu/Bebida`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Bebidas
                             </h5>

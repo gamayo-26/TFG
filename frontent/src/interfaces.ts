@@ -29,7 +29,7 @@ export interface Order {
     address: string;
     city: string;
     postal_code: string;
-    phone: string;
+    hora: string;
     comentary: string;
     order_items: Producto[];
 }

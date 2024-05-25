@@ -138,9 +138,9 @@ const AddProductPage = () => {
                                         <option value="">Select product category</option>
                                         <option value="Menu">Menu</option>
                                         <option value="Hamburguesas">Hamburguesas</option>
-                                        <option value="pizza P">Pizzeta</option>
-                                        <option value="pizza M">Pizza Mediana</option>
-                                        <option value="pizza F">Pizza Familiar</option>
+                                        <option value="Pizzeta">Pizzeta</option>
+                                        <option value="Pizza Mediana">Pizza Mediana</option>
+                                        <option value="Pizza Familiar">Pizza Familiar</option>
                                         <option value="Bocadillo">Bocadillo</option>
                                         <option value="Sandwich">Sandwich</option>
                                         <option value="Perrito">Perrito</option>

@@ -27,12 +27,12 @@ const Orders = ({ results }: Props) => {
         else
             setFilteredOrders([]);
     }, [data]);
-    
+
     const handleChange = (e: any) => {
         if (e.target.checked) {
             setFilteredOrders(data);
         } else {
-            const filtered = data.filter((o: any) => o.is_delivered === false);
+            const filtered = data.filter((o: any) => o.status === "Entregado");
             setFilteredOrders(filtered);
         }
     };
@@ -91,7 +91,9 @@ const Orders = ({ results }: Props) => {
                         <th scope="col" className="px-6 py-3">
                             Detalles del Pedido
                         </th>
-
+                        <th scope="col" className="px-6 py-3">
+                            Hora de entrega
+                        </th>
                     </tr>
                 </thead>
 
@@ -104,19 +106,16 @@ const Orders = ({ results }: Props) => {
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td className="w-4 p-4">
                                             <div className="flex items-center">
-                                                <input
-                                                    onClick={() => editOrderMut.mutate(o.id)}
-                                                    id="checkbox-table-search-1"
-                                                    type="checkbox"
-                                                    checked={o.is_delivered}
+                                                <button
+                                                    onClick={() => {
+                                                        if (o.status < 2) {
+                                                            editOrderMut.mutate(o.id);
+                                                        }
+                                                    }}
                                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                />
-                                                <label
-                                                    htmlFor="checkbox-table-search-1"
-                                                    className="sr-only"
                                                 >
-                                                    checkbox
-                                                </label>
+                                                    {o.status === 0 ? "Preparacion" : o.status === 1 ? "Reparto" : "Entregado"}
+                                                </button>
                                             </div>
                                         </td>
                                         <th
@@ -126,11 +125,11 @@ const Orders = ({ results }: Props) => {
                                             {o.id}
                                         </th>
                                         <td className="px-6 py-4">
-                                            {o.user}
+                                            {o.user.email}
 
                                         </td>
                                         <td className="px-6 py-4">
-                                            {o.phone}
+                                            {o.user.phone}
                                         </td>
                                         <td className="px-6 py-4">
                                             $ {o.total_price}
@@ -151,10 +150,10 @@ const Orders = ({ results }: Props) => {
                                                 Ver mas...
                                             </Link>
                                         </td>
-
+                                        <td className="px-6 py-4">
+                                            {o.hora_entrega}
+                                        </td>
                                     </tr>
-
-
                                 </tbody>
 
 
@@ -168,19 +167,16 @@ const Orders = ({ results }: Props) => {
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="w-4 p-4">
                                     <div className="flex items-center">
-                                        <input
-                                            onClick={() => editOrderMut.mutate(o.id)}
-                                            id="checkbox-table-search-1"
-                                            type="checkbox"
-                                            checked={o.is_delivered}
+                                        <button
+                                            onClick={() => {
+                                                if (o.status < 2) {
+                                                    editOrderMut.mutate(o.id);
+                                                }
+                                            }}
                                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                        />
-                                        <label
-                                            htmlFor="checkbox-table-search-1"
-                                            className="sr-only"
                                         >
-                                            checkbox
-                                        </label>
+                                            {o.status === 0 ? "Preparacion" : o.status === 1 ? "Reparto" : "Entregado"}
+                                        </button>
                                     </div>
                                 </td>
                                 <th
@@ -190,11 +186,11 @@ const Orders = ({ results }: Props) => {
                                     {o.id}
                                 </th>
                                 <td className="px-6 py-4">
-                                    {o.user}
+                                    {o.user.email}
 
                                 </td>
                                 <td className="px-6 py-4">
-                                    {o.phone}
+                                    {o.user.phone}
                                 </td>
                                 <td className="px-6 py-4">
                                     $ {o.total_price}
@@ -215,7 +211,9 @@ const Orders = ({ results }: Props) => {
                                         Ver mas...
                                     </Link>
                                 </td>
-
+                                <td className="px-6 py-4">
+                                    {o.hora_entrega}
+                                </td>
                             </tr>
                         ))}
                     </tbody>

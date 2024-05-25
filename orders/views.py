@@ -3,10 +3,11 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import datetime
-
+from datetime import timedelta
 from .models import Order, OrderItem, ShippingAddress
 from .serializers import OrderSerializer
 from productos.models import Product
+
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
@@ -18,11 +19,13 @@ def search(request):
     serializer = OrderSerializer(order, many=True)
     return Response({'orders': serializer.data})
 
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def get_orders(request):
-    orders = Order.objects.all().order_by('-created_at')
+    orders = Order.objects.all().order_by('-hora_entrega')
     serializer = OrderSerializer(orders, many=True)
+    print(serializer.data)
     return Response(serializer.data)
 
 
@@ -34,16 +37,23 @@ def create_order(request):
     orderItems = data['order_items']
     total_price = data['total_price']
 
+    def _calculate_delivery_time(fecha):
+        if fecha == 'lo antes posible':
+            hora = datetime.now() + timedelta(minutes=45)
+            return hora.strftime('%H:%M')
+        else:
+            hora = datetime.strptime(fecha, '%H:%M').time()
+            return hora.strftime('%H:%M')
+
     # Calcular la suma de los precios de los productos
-    sum_of_prices = sum(float(item['price'])*float(item['quantity']) for item in orderItems)
-    print('Sum of prices:', sum_of_prices)
-    print('Total price:', total_price)
+    sum_of_prices = sum(
+        float(item['price'])*float(item['quantity']) for item in orderItems)
     if total_price == sum_of_prices:
         # Crear la orden
         order = Order.objects.create(
             user=user,
-            phone=data['phone'],
-            total_price=total_price
+            total_price=total_price,
+            hora_entrega=_calculate_delivery_time(data['hora']),
         )
 
         ShippingAddress.objects.create(
@@ -71,7 +81,6 @@ def create_order(request):
     else:
         print('El precio total no coincide con la suma de los precios de los productos')
         return Response({'mensaje': 'El precio total no coincide con la suma de los precios de los productos'}, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 @api_view(['GET'])
@@ -103,6 +112,6 @@ def my_orders(request):
 @permission_classes([IsAdminUser])
 def delivered(request, pk):
     order = Order.objects.get(pk=pk)
-    order.is_delivered = True
+    order.status = order.status + 1
     order.save()
     return Response('Order was delivered')

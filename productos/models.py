@@ -4,15 +4,16 @@ from users.models import User
 CATEGORY_CHOICES = [
     ('Menu', 'Menu'),
     ('Hamburguesas', 'Hamburguesas'),
-    ('pizza P', 'Pizzeta'),
-    ('pizza M', 'Pizza Mediana'),
-    ('pizza F', 'Pizza Familiar'),
+    ('Pizzeta', 'Pizzeta'),
+    ('Pizza Mediana', 'Pizza Mediana'),
+    ('Pizza Familiar', 'Pizza Familiar'),
     ('Bocadillo', 'Bocadillo'),
     ('Sandwich', 'Sandwich'),
     ('Perrito', 'Perrito'),
     ('Picoteo', 'Picoteo'),
     ('Bebida', 'Bebida'),
     ('Postre', 'Postre'),
+    ('Ensalada', 'Ensalada'),
 ]
 
 class Product(models.Model):

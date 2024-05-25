@@ -23,7 +23,7 @@ const LoginPage = () => {
         mutationFn: () => loginRequest(email, password),
         onSuccess: (response) => {
             setToken(response.data.access, response.data.refresh)
-            toast.success('Vienvenido!')
+            toast.success('Bienvenido!')
             navigate('/')
         },
         onError: () => {
