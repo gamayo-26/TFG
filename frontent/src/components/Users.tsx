@@ -102,7 +102,7 @@ const Users = ({ results }: Props) => {
                                 <td className="px-4 py-3 flex items-center justify-center gap-4">
                                     <BsFillTrashFill size={22}
                                         onClick={() => deleteRequestMut.mutate(user.email)}
-                                        className="text-red-300 cursor-pointer" />
+                                        className="text-red-400 cursor-pointer" />
                                 </td>
                             </tr>
                         ))}

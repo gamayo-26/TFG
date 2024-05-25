@@ -136,6 +136,7 @@ const UserProfile = () => {
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
+                                        <th scope="col" className="px-4 py-3 text-center">Estado</th>
                                         <th scope="col" className="px-4 py-3 text-center">Numero de Orden</th>
                                         <th scope="col" className="px-4 py-3 text-center">Informacion</th>
                                     </tr>
@@ -144,6 +145,17 @@ const UserProfile = () => {
                                 <tbody>
                                     {data && data.map((order: any) => (
                                         <tr className="border-b dark:border-gray-700">
+                                            <td className="px-4 py-3 text-center">
+                                                {order.status === 0 ? (
+                                                    <p>👨🏻‍🍳Preparacion</p>
+                                                ) : order.status === 1 ? (
+                                                    <p>🛵Reparto</p>
+                                                ) : order.status === 2 ? (
+                                                    <p>✅Entregado</p>
+                                                ) : (
+                                                    <p>❌Cancelado</p>
+                                                )}
+                                            </td>
                                             <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
                                                 {order.id}
                                             </th>

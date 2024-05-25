@@ -32,7 +32,7 @@ const Orders = ({ results }: Props) => {
         if (e.target.checked) {
             setFilteredOrders(data);
         } else {
-            const filtered = data.filter((o: any) => o.status === "Entregado");
+            const filtered = data.filter((o: any) => o.status != 2);
             setFilteredOrders(filtered);
         }
     };
@@ -41,7 +41,7 @@ const Orders = ({ results }: Props) => {
         mutationFn: edit_order,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["orders"] });
-            toast.success("Order delivered!");
+            toast.success("Orden actualizada!");
         },
         onError: () => {
             toast.error("Error!");
@@ -106,13 +106,13 @@ const Orders = ({ results }: Props) => {
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td className="w-4 p-4">
                                             <div className="flex items-center">
-                                                <button
+                                                <button 
                                                     onClick={() => {
                                                         if (o.status < 2) {
                                                             editOrderMut.mutate(o.id);
                                                         }
                                                     }}
-                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-red-200"
                                                 >
                                                     {o.status === 0 ? "Preparacion" : o.status === 1 ? "Reparto" : "Entregado"}
                                                 </button>
@@ -163,7 +163,7 @@ const Orders = ({ results }: Props) => {
                 ) : (
 
                     <tbody>
-                        {filteredOrders && filteredOrders.map((o: any) => (
+                        {Array.isArray(filteredOrders) && filteredOrders.map((o: any) => (
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="w-4 p-4">
                                     <div className="flex items-center">
@@ -173,7 +173,7 @@ const Orders = ({ results }: Props) => {
                                                     editOrderMut.mutate(o.id);
                                                 }
                                             }}
-                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-red-200"
                                         >
                                             {o.status === 0 ? "Preparacion" : o.status === 1 ? "Reparto" : "Entregado"}
                                         </button>

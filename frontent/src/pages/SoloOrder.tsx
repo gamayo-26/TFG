@@ -13,7 +13,7 @@ const SoloOrder = () => {
     if (id !== undefined) {
         new_id = Number(id);
     }
-    
+
     const { data, isError, isLoading } = useQuery({
         queryKey: ["orders"],
         queryFn: () => solo_order(new_id),
