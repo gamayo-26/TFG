@@ -49,18 +49,17 @@ const SoloProduct = () => {
                     </div>
                     {/* Product info */}
                     <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-blue-300">{data.name}</h1>
+                        <h1 className="text-5xl font-extrabold tracking-tight text-orange-500">{data.name}</h1>
 
                         <div className="mt-3">
-                            <h2 className="sr-only text-white dark:text-white">{data.description}</h2>
-                            <p className="text-3xl text-green-300">€{data.price}</p>
+                            <p className="text-3xl text-green-300">{data.price}€</p>
                         </div>
 
                         <div className="mt-6">
                             <h3 className="sr-only">Description</h3>
 
                             <div
-                                className="text-base text-gray-700 space-y-6"
+                                className="text-base text-gray-700 space-y-6 dark:text-gray-300"
                                 dangerouslySetInnerHTML={{ __html: data.description }}
                             />
                         </div>

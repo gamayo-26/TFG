@@ -44,7 +44,7 @@ const LoginPage = () => {
         <div>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-[800px] lg:py-0">
                 <Link to="/" className="flex items-center mb-6 text-5xl font-semibold text-orange-400">
-                    <img className="w-12 h-12 mr-2" src={Logo} alt="logo" />
+                    <img className="w-24 h-24 mr-2" src={Logo} alt="logo" />
                     <span>Pizza Sprint</span>
                 </Link>
                 <div className="w-full md:w-[400px] lg:w-[500px] bg-slate-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

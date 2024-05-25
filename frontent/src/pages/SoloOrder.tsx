@@ -26,7 +26,7 @@ const SoloOrder = () => {
     return (
         <div className="overflow-x-auto container mx-auto px-4 pt-11">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-orange-400 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-orange-400 dark:text-gray-200">
                     <tr>
                         <th scope="col" className="px-4 py-3 text-center">
                             Telefono
@@ -110,11 +110,11 @@ const SoloOrder = () => {
                             $ {data.total_price}
                         </th>
 
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 text-center">
                             {data.is_delivered === false || null ? (
-                                <p>No entregado</p>
+                                <p>En preparacion</p>
                             ) : (
-                                <p>entregado</p>
+                                <p>En reparto</p>
                             )}
                         </td>
                     </tr>
@@ -122,7 +122,7 @@ const SoloOrder = () => {
             </table>
 
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-11 ">
-                <thead className="text-xs text-gray-700 uppercase bg-orange-400 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-orange-400 dark:text-gray-200">
                     <tr>
                         <th scope="col" className="px-4 py-3">
                             ID Producto

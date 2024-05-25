@@ -57,10 +57,9 @@ const CartPage = () => {
             toast.error('El carrito esta vacio');
             return;
         }
-        // Validar que el usuario este autenticado
-        const user = localStorage.getItem('user');
-        if (!user) {
-            toast.error('Debes iniciar sesion para realizar un pedido');
+        // Validar que los codigos postales sean de la sona de reparto (28035 y 28031)
+        if ( postal_code !== '28051' && postal_code !== '28031') {
+            toast.error('Lo siento, no repartimos en tu zona');
             return;
         }
 

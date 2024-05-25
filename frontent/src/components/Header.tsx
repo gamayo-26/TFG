@@ -69,7 +69,7 @@ const Header = () => {
                                     <Link to={'/'}>
                                         <span className="sr-only">Pizza Sprint</span>
                                     <img
-                                        className="hidden h-8 w-auto lg:block"
+                                        className="hidden h-10 w-auto lg:block"
                                         src={Logo}
                                         alt="Logo"
                                     />
